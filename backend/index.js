@@ -1,14 +1,14 @@
 const express = require('express');
 const app = express();
 const port = 3000;
+const path = require('path');
+const router = express.Router()
 
-app.get('/', function (req, res) {
-  res.send('Hello World!')
-})
+router.get('/', function (req, res) {
+  res.sendFile(path.join(__dirname, '../frontend/index.html'));
+});
 
-app.use(function (req, res) {
-  res.status(404).send("Page not found")
-})
+app.use('/', router);
 
 app.listen(port, () => {
   console.log(`Listening at port ${port}`);
