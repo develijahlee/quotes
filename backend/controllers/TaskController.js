@@ -1,5 +1,5 @@
 const Task = require("../models/Task");
-//List all available tasks from database....
+// List all available tasks from database
 exports.listAllTasks = (req, res) => {
   Task.find({}, (err, task) => {
     if (err) {
@@ -8,9 +8,11 @@ exports.listAllTasks = (req, res) => {
     res.status(200).json(task);
   });
 };
-// Creating a new task and save it to database....
+// Create a new task and save it to database
 exports.createNewTask = (req, res) => {
-  let newTask = new Task(req.body);
+  let test = res.json(req.body.test)
+  let newTask = new Task(test);
+  console.log(newTask)
   newTask.save((err, task) => {
     if (err) {
       res.status(500).send(err);
@@ -18,8 +20,8 @@ exports.createNewTask = (req, res) => {
     res.status(201).json(task);
   });
 };
-// read a perticular task by _id......
-exports.readTask = (req, body) => {
+// Read a particular task by _id
+exports.readTask = (req, res) => {
   Task.findById(req.params.taskid, (err, task) => {
     if (err) {
       res.status(500).send(err);
@@ -27,7 +29,7 @@ exports.readTask = (req, body) => {
     res.status(200).json(task);
   });
 };
-//Update a perticular task by _id ....
+// Update a particular task by _id
 exports.updateTask = (req, res) => {
   Task.findOneAndUpdate(
     { _id: req.params.taskid },
@@ -41,9 +43,9 @@ exports.updateTask = (req, res) => {
     }
   );
 };
-// Delete a perticular task by _id .....
+// Delete a particular task by _id
 exports.deleteTask = (req, res) => {
-  Task.remove({ _id: req.params.taskid }, (err, task) => {
+  Task.deleteOne({ _id: req.params.taskid }, (err, task) => {
     if (err) {
       res.status(404).send(err);
     }
