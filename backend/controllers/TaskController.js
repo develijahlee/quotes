@@ -10,7 +10,10 @@ exports.listAllTasks = (req, res) => {
 };
 // Create a new task and save it to database
 exports.createNewTask = (req, res) => {
-  let newTask = new Task(JSON.parse(req.body.test));
+  let newTask = new Task({
+    content: req.body.content,
+    author: req.body.author
+  });
   newTask.save((err, task) => {
     if (err) {
       res.status(500).send(err);
