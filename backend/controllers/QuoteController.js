@@ -1,53 +1,53 @@
-const Task = require("../models/Task");
+const Quote = require("../models/Task");
 // List all available tasks from database
-exports.listAllTasks = (req, res) => {
-  Task.find({}, (err, task) => {
+exports.listAllQuotes = (req, res) => {
+  Quote.find({}, (err, quote) => {
     if (err) {
       res.status(500).send(err);
     }
-    res.status(200).json(task);
+    res.status(200).json(quote);
   });
 };
 // Create a new task and save it to database
-exports.createNewTask = (req, res) => {
-  let newTask = new Task({
+exports.createNewQuote = (req, res) => {
+  let newQuote = new Quote({
     content: req.body.content,
     author: req.body.author
   });
-  newTask.save((err, task) => {
+  newQuote.save((err, quote) => {
     if (err) {
       res.status(500).send(err);
     } else {
-      res.status(201).json(task);
+      res.status(201).json(quote);
     }
   });
 };
 // Read a particular task by _id
-exports.readTask = (req, res) => {
-  Task.findById(req.params.taskid, (err, task) => {
+exports.readQuote = (req, res) => {
+  Quote.findById(req.params.quoteid, (err, quote) => {
     if (err) {
       res.status(500).send(err);
     }
-    res.status(200).json(task);
+    res.status(200).json(quote);
   });
 };
 // Update a particular task by _id
-exports.updateTask = (req, res) => {
-  Task.findOneAndUpdate(
-    { _id: req.params.taskid },
+exports.updateQuote = (req, res) => {
+  Quote.findOneAndUpdate(
+    { _id: req.params.quoteid },
     req.body,
     { new: true },
     (err, task) => {
       if (err) {
         res.status(500).send(err);
       }
-      res.status(200).json(task);
+      res.status(200).json(quote);
     }
   );
 };
 // Delete a particular task by _id
-exports.deleteTask = (req, res) => {
-  Task.deleteOne({ _id: req.params.taskid }, (err, task) => {
+exports.deleteQuote = (req, res) => {
+  Quote.deleteOne({ _id: req.params.quoteid }, (err, quote) => {
     if (err) {
       res.status(404).send(err);
     }

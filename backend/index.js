@@ -1,5 +1,5 @@
 const express = require('express');
-const taskController = require("./controllers/TaskController");
+const quoteController = require("./controllers/QuoteController");
 require("./config/db");
 const app = express();
 const port = 3000;
@@ -9,15 +9,15 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 app
-  .route("/tasks")
-  .get(taskController.listAllTasks)
-  .post(taskController.createNewTask);
+  .route("/quotes")
+  .get(quoteController.listAllQuotes)
+  .post(quoteController.createNewQuote);
 
 app
-  .route("/tasks/:taskid")
-  .get(taskController.readTask)
-  .put(taskController.updateTask)
-  .delete(taskController.deleteTask);
+  .route("/quotes/:quoteid")
+  .get(quoteController.readQuote)
+  .put(quoteController.updateQuote)
+  .delete(quoteController.deleteQuote);
 
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, '../frontend/index.html'));
