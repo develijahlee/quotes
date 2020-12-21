@@ -1,4 +1,4 @@
-const Quote = require("../models/Task");
+const Quote = require("../models/Quote");
 // List all available tasks from database
 exports.listAllQuotes = (req, res) => {
   Quote.find({}, (err, quote) => {
