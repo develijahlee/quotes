@@ -6,4 +6,4 @@ const QuoteSchema = new Schema({
   author: String
 });
 
-module.exports = mongoose.model("Tasks", QuoteSchema);
+module.exports = mongoose.model("Quote", QuoteSchema);

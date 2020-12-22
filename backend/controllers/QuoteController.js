@@ -1,5 +1,5 @@
 const Quote = require("../models/Quote");
-// List all available tasks from database
+// List all available quotes from database
 exports.listAllQuotes = (req, res) => {
   Quote.find({}, (err, quote) => {
     if (err) {
@@ -8,7 +8,7 @@ exports.listAllQuotes = (req, res) => {
     res.status(200).json(quote);
   });
 };
-// Create a new task and save it to database
+// Create a new quote and save it to database
 exports.createNewQuote = (req, res) => {
   let newQuote = new Quote({
     content: req.body.content,
@@ -22,7 +22,7 @@ exports.createNewQuote = (req, res) => {
     }
   });
 };
-// Read a particular task by _id
+// Read a particular quote by _id
 exports.readQuote = (req, res) => {
   Quote.findById(req.params.quoteid, (err, quote) => {
     if (err) {
@@ -31,13 +31,13 @@ exports.readQuote = (req, res) => {
     res.status(200).json(quote);
   });
 };
-// Update a particular task by _id
+// Update a particular quote by _id
 exports.updateQuote = (req, res) => {
   Quote.findOneAndUpdate(
     { _id: req.params.quoteid },
     req.body,
     { new: true },
-    (err, task) => {
+    (err, quote) => {
       if (err) {
         res.status(500).send(err);
       }
@@ -45,12 +45,12 @@ exports.updateQuote = (req, res) => {
     }
   );
 };
-// Delete a particular task by _id
+// Delete a particular quote by _id
 exports.deleteQuote = (req, res) => {
   Quote.deleteOne({ _id: req.params.quoteid }, (err, quote) => {
     if (err) {
       res.status(404).send(err);
     }
-    res.status(200).json({ message: "Task successfully deleted" });
+    res.status(200).json({ message: "Quote successfully deleted" });
   });
 };
