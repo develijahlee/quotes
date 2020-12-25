@@ -18,7 +18,12 @@ exports.createNewQuote = (req, res) => {
     if (err) {
       res.status(500).send(err);
     } else {
-      res.status(201).json(quote);
+      Quote.find({}, (err, quote) => {
+        if (err) {
+          res.status(500).send(err);
+        }
+        res.status(200).json(quote);
+      });
     }
   });
 };
